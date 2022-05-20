@@ -1,7 +1,7 @@
 const connectToMongoose = require("./database/db");
 const morgan = require("morgan");
 
-// const cors = require("cors");
+const cors = require("cors");
 const express = require("express");
 
 connectToMongoose();
@@ -9,11 +9,11 @@ connectToMongoose();
 const app = express();
 const PORT = 5000;
 
-// const corsOptions = {
-//   origin: "http://localhost:3000",
-// };
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")

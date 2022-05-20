@@ -45,10 +45,10 @@ const createuser = async (req, res) => {
             id: result.id,
           },
         };
-          const authtoken = jwt.sign(data, JWT_SECRET);
-          response.success = true;
-          response.message = "User registered successfully";
-          console.log(response);
+        const authtoken = jwt.sign(data, JWT_SECRET);
+        response.success = true;
+        response.message = "User registered successfully";
+        console.log(response);
         res.send({ authtoken });
       }
     })
@@ -145,7 +145,17 @@ const logout = async (req, res) => {
       console.log(response);
       return res.status(400).json({ error: "User has not logged in !!" });
     }
+//     console.log("line148")
+// jwt.destroy(authtoken);
+//     console.log("line150")
+    // console.log(isLoggedOut);
+    // if (isLoggedOut) {
+    //   console.log("Logged out succefully");
+    // } else {
+    //   console.log("Logout unsuccessful");
+    // }
   } catch (err) {
+    console.log("line150")
     console.log(err.message);
     res.status(500).send("Some Internal Server Error occured");
   }

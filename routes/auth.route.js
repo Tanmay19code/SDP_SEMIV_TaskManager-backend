@@ -10,6 +10,7 @@ const {
   deleteuser,
 } = require("../controllers/auth.controller");
 const fetchuser = require("../middlewares/fetchuser.middleware.js");
+const logoutuser = require("../middlewares/logoutuser.middleware.js");
 
 //Route 1: Create an user using : POST "/api/auth/createuser" . Doesn't require authentication
 router.post(
@@ -51,6 +52,6 @@ router.put(
 router.delete("/deleteuser/:id", fetchuser, deleteuser);
 
 //Route 6: Logout user: POST "api/auth/logout". Login required
-router.post("/logout", fetchuser, logout);
+router.post("/logout", logoutuser, logout);
 
 module.exports = router;

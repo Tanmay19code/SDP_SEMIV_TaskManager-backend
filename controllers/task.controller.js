@@ -11,18 +11,17 @@ const createtask = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const { title, description, deadline } = req.body;
+  const { title, description } = req.body;
   const createdBy = req.user.id;
-  const dateStr = Date.now();
+  // const dateStr = Date.now();
   if (createdBy) {
     Task.create({
       title: title,
       createdBy: createdBy,
       description: description ? description : "",
-      deadline: deadline ? deadline : null,
+      // deadline: deadline ? deadline : null,
     })
       .then((result) => {
-        // To be written
         if (result) {
           response.success = true;
           response.message = "Task added succesfully";
@@ -85,16 +84,31 @@ const getmytask = async (req, res) => {
 
 const getmyalltasks = async (req, res) => {
   const userId = req.user.id;
+  let todayDate = new Date().toISOString().slice(0, 10);
   await Task.find({ createdBy: userId })
     .then((result) => {
       if (result) {
-        response.success = true;
-        response.message = "Tasks found successfully";
-        console.log(response);
-        return res.status(200).send({
-          noOfTasksFound: result.length,
-          tasks: result,
+        const filteredResult = result.filter((item) => {
+          dateStr = JSON.stringify(item.createdAt).slice(1, 11);
+          console.log("dateStr=>", dateStr);
+          if (dateStr == todayDate) {
+            return item;
+          }
         });
+        if (filteredResult) {
+          response.success = true;
+          response.message = "Tasks found successfully";
+          console.log(response);
+          return res.status(200).send({
+            noOfTasksFound: filteredResult.length,
+            tasks: filteredResult,
+          });
+        } else {
+          response.success = false;
+          response.message = "No task found";
+          console.log(response);
+          return res.status(404).send("No tasks found");
+        }
       } else {
         response.success = false;
         response.message = "No task found";
@@ -125,6 +139,7 @@ const getmyalltaskswithdate = async (req, res) => {
       if (result) {
         const filteredResult = result.filter((item) => {
           dateStr = JSON.stringify(item.createdAt).slice(1, 11);
+          console.log(dateStr,date);
           if (dateStr == date) {
             return item;
           }
@@ -307,8 +322,7 @@ const deletemytask = async (req, res) => {
           console.log(response);
           return res.status(500).send(err.message);
         });
-    }
-    else {
+    } else {
       response.success = false;
       response.message = "No task found";
       console.log(response);
