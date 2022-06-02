@@ -39,8 +39,8 @@ router.post(
 
 //Route 6: Get an task using : POST "/api/task/updatemytask/6252f6fb7ab38ffa04289a85" . Require authentication
 router.put("/updatemytask/:id", fetchuser, updatemytask);
-
+  
 //Route 7: Get an task using : POST "/api/task/deletemytask/6252f6fb7ab38ffa04289a85" . Require authentication
-router.delete("/deletemytask/:id", fetchuser, deletemytask);
+router.post("/deletemytask/:id", fetchuser, deletemytask);
 
 module.exports = router;
