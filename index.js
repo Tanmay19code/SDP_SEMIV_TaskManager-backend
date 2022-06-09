@@ -21,11 +21,11 @@ app.use(
 
 app.use(express.json());
 
-// app.use("/", (req, res) => {
-//   res
-//     .status(200)
-//     .send("This is the Backend Server of Task Manager made by Tanmay Mutalik");
-// });
+app.use("/", (req, res) => {
+  res
+    .status(200)
+    .send("This is the Backend Server of Task Manager made by Tanmay Mutalik");
+});
 app.use("/api/auth", require("./routes/auth.route.js"));
 app.use("/api/task", require("./routes/task.route.js"));
 
