@@ -1,5 +1,8 @@
 const connectToMongoose = require("./database/db");
 const morgan = require("morgan");
+require("dotenv").config({ path: "./.env" });
+
+
 
 const cors = require("cors");
 const express = require("express");
@@ -7,10 +10,10 @@ const express = require("express");
 connectToMongoose();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: `http://localhost:${PORT}`,
 };
 
 app.use(cors(corsOptions));
