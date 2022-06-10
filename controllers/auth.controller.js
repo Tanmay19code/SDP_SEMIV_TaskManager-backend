@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 const User = require("../models/user.model.js");
 require("dotenv").config({ path: "../.env" });
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET || "ThisIsMySecret";
 
 const response = {
   success: true,
