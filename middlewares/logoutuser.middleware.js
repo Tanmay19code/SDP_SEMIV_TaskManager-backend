@@ -1,6 +1,6 @@
 var jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "../.env" });
-const JWT_SECRET = process.env.JWT_SECRET || ThisIsMySecret;
+const JWT_SECRET =  "ThisIsMySecret";
 
 const logoutuser = (req, res, next) => {
 
