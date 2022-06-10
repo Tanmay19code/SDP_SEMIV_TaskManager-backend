@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
   // origin: `http://localhost:${PORT}`,
-  origin: `https://my-task-manager-web-app.netlify.app/`,
+  origin: `https://my-task-manager-web-app.netlify.app`,
 };
 
 app.use(cors(corsOptions));
